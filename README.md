@@ -1,0 +1,2 @@
+# BlogStructure
+Django Blog Structure
