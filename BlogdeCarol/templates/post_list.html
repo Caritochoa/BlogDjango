@@ -4,6 +4,9 @@
 
 	<div class = 'col-sm-8 col-sm-offset-2'>	
 	<h1>{{ title }}</h1>
+	<form method='GET' action = ''>
+	<input type="text" name='q' placeholder="Search posts" value='{{ request.GET.q }}'/>
+	<input type = 'submit' value='Search'/>
 
 
 		
@@ -11,9 +14,13 @@
 	<div class = "row">
 	<div class = 'col-sm-12'>
 	<div class = "thumbnail">
-		<!--<img src="..." class="rounded" alt="...">-->
+		{% if obj.image %}
+		<img src="{{ obj.image.url }}" class="img-responsive" />
+		{% endif %}
+		
 		<div class = "caption">
-		<h3><a href="{{ obj.get_absolute_url }}">{{ obj.title }} </a> <small>{{ obj.timestamp|timesince }} ago</small></h3>
+		<h3><a href="{{ obj.get_absolute_url }}">{{ obj.title }} </a> <small>{{ obj.publish }}</small></h3>
+	{% if obj.user.get_full_name %}<p>Author:{{ obj.user.get_full_name }}</p> {% endif %}	
 	<p>{{ obj.content|linebreaks|truncatechars:120 }} </p>
 	<p><a href="{{ obj.get_absolute_url }}" class="btn btn-primary" role= "button">view</a></p>
 	</div>
