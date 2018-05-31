@@ -5,6 +5,7 @@ from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect 
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.utils import timezone
+#probando unos cambiesitos
 
 
 from .models import Post
