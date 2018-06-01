@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
+<h1> El Blog de Carol </h1>
+
+<p> Hola, este es mi Blog personal donde comparto algunas ideas, puedes encontrar diferentes artículos sobre la participación de las mujeres en tecnología, actualidad y desarrollo web. <p>
 
 	<div class = 'col-sm-8 col-sm-offset-2'>	
 	<h1>{{ title }}</h1>
@@ -11,10 +14,13 @@
 
 		
 	{% for obj in object_list %}
+
 	<div class = "row">
 	<div class = 'col-sm-12'>
 	<div class = "thumbnail">
+
 		{% if obj.image %}
+
 		<img src="{{ obj.image.url }}" class="img-responsive" />
 		{% endif %}
 		

@@ -5,7 +5,7 @@ from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect 
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.utils import timezone
-#probando unos cambiesitos
+
 
 
 from .models import Post
@@ -14,13 +14,12 @@ from .forms import PostForm
 
 def post_create(request):
 	if not request.user.is_staff or not request.user.is_superuser:
-		raise http404
+		raise Http404
 
 	form = PostForm(request.POST or None, request.FILES or None)
 	if form.is_valid():
 		instance = form.save(commit = False)
 		instance.user = request.user
-		print(form.cleaned_data.get('title'))#comparar esta linea particular.
 		instance.save()
 		messages.success(request, "Post succesfully created")
 		return HttpResponseRedirect(instance.get_absolute_url())
@@ -28,6 +27,7 @@ def post_create(request):
 		"form": form,
 	}
 	return render(request, "post_form.html", context)
+
 
 
 def post_detail(request, slug=None):	
@@ -67,7 +67,7 @@ def post_list(request):
 	
 	context = {       
 		"object_list": queryset,
-		"title": "List",
+		"title": "Artículos",
 		"page_request:var": page_request_var
 	}
 	return render(request,"post_list.html", context)
@@ -97,7 +97,7 @@ def post_update(request, slug = None):
 def post_delete(request, id= None):
 	if request.user.is_staff or request or not request.user.is_superuser:
 		raise http404
-	instance = get_object_or_404(Post, id=id)
+	instance = get_object_or_404(Post, slug = slug)
 	instance.delete()
 	messages.success(request, "Succesfully Deleted")
 	return redirect("posts:list")
