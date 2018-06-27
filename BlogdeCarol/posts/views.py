@@ -44,7 +44,7 @@ def post_detail(request, slug=None):
 def post_list(request):
 
 	today = timezone.now().date()
-	#queryset_list = Post.objects.active()
+	#queryset_list = Post.objects.all()
 	if request.user.is_staff or request.user.is_superuser:
 		queryset_list= Post.objects.all()
 	
